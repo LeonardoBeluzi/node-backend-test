@@ -13,10 +13,55 @@ class User extends Model {
 
 User.init(
     {
-        name: Sequelize.STRING,
-        dob: Sequelize.DATE,
-        address: Sequelize.STRING,
-        description: Sequelize.TEXT,
+        name: {
+            type: Sequelize.STRING,
+            allowNull: false,
+            validate: {
+                notEmpty: {
+                    msg: 'Field "name" cannot be empty'
+                },
+
+                len: {
+                    args: [3, 255],
+                    msg: 'Field "name" must be between 3 and 255 characters'
+                }
+            }
+        },
+
+        dob: {
+            type: Sequelize.DATEONLY,
+            allowNull: false,
+            validate: {
+                notEmpty: {
+                    msg: 'Field "dob" cannot be empty'
+                },
+
+                isDate: {
+                    args: true,
+                    msg: 'Field "dob" is not a valid date'
+                }
+            }
+        },
+
+        address: {
+            type: Sequelize.STRING,
+            allowNull: false,
+            validate: {
+                notEmpty: {
+                    msg: 'Field "address" cannot be empty'
+                },
+
+                len: {
+                    args: [5, 255],
+                    msg: 'Field "address" must be between 5 and 255 characters'
+                }
+            }
+        },
+
+        description: {
+            type: Sequelize.TEXT,
+            allowNull: true
+        }
     },
     {
         sequelize: database,
