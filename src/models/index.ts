@@ -1,5 +1,5 @@
 import { Sequelize, Dialect } from 'sequelize'
-import databaseConfig from '../config/database'
+import databaseConfig from '../database/config/database'
 
 const sequelize: Sequelize = new Sequelize(
     {
@@ -8,7 +8,11 @@ const sequelize: Sequelize = new Sequelize(
         password: databaseConfig.password,
         host: databaseConfig.host,
         port: databaseConfig.port,
-        database: databaseConfig.database
+        database: databaseConfig.database,
+        define: {
+            timestamps: true,
+            underscored: false
+        }
     }
 )
 
