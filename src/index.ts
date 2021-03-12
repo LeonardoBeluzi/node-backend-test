@@ -2,6 +2,7 @@ import 'dotenv/config'
 
 import express from 'express'
 import helmet from 'helmet'
+import errorHandler from './middlewares/errorHandler'
 import router from './routes'
 
 //Creating API and getting port
@@ -11,6 +12,7 @@ const port = process.env.PORT || 8000
 //Defining middlewares
 api.use(express.json())
 api.use(helmet())
+api.use(errorHandler)
 api.use(router)
 
 //Stating API
