@@ -1,4 +1,4 @@
-# API REFERENCES
+# API References
 
 **List Users**
 ----
