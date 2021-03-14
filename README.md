@@ -1,67 +1,174 @@
 # Raks Back-end Developer Test
 
-Be sure to read **all** of this document carefully, and follow the guidelines within.
+**List Users**
+----
+  Returns json data about all users.
 
-## Context
+* **URL**
 
-Build a RESTful API that can `create/read/update/delete` user data from a persistence store.
+  /user
 
-### User Model
+* **Method:**
 
-```
-{
-  "id": "xxx",                  // user ID (must be unique)
-  "name": "backend test",       // user name
-  "dob": "",                    // date of birth
-  "address": "",                // user address
-  "description": "",            // user description
-  "createdAt": ""               // user created date
-  "updatedAt": ""               // user updated date
-}
-```
+  `GET`
+  
+*  **URL Params**
 
-### Functionality
+   None
 
-- The API should follow typical RESTful API design pattern.
-- The data should be saved in the DB.
-- Provide proper API documentation.
-- Proper error handling should be used.
+* **Data Params**
 
-## What We Care About
+   None
 
-Use any libraries that you would normally use if this were a real production App. Please note: we're interested in your code & the way you solve the problem, not how well you can use a particular library or feature.
+* **Success Response:**
 
-_We're interested in your method and how you approach the problem just as much as we're interested in the end result._
+  * **Code:** 200 <br />
+    **Content:** `[ { id: 1, name: "Leonardo", dob: "1995-09-29", address: "Avenida Brasil, 2042", description: "Minha descrição", createdAt: "2021-03-14T15:52:53.000Z", updatedAt: "2021-03-14T15:52:53.000Z" } ]`
+ 
+* **Error Response:**
 
-Here's what you should strive for:
+   None
 
-- Good use of current Node.js & Express.js
-- Good use of API design best practices.
-- Solid testing approach.
-- Extensible code.
+**Show User**
+----
+  Returns json data about a single user.
 
-## Implementation Path:
+* **URL**
 
-### Basic Requirements
+  /user/:id
 
-  - Use Node.js `LTS` and any framework of your choice.
-  - Use any SQL DB. MySQL DB is preferred.
-  - Write concise and clear commit messages.
-  - Write clear **documentation** on how it has been designed and how to run the code.
+* **Method:**
 
-### Bonus
-  - **Use typescript.**
-  - Use of Sequelize ORM (https://sequelize.org/)
-  - Provide proper unit tests.
-  - Add a read only endpoint to fetch location information based off the user's address (use [NASA](https://api.nasa.gov/api.html) or [Mapbox](https://www.mapbox.com/api-documentation/) APIs)
-  - Providing an online demo is welcomed, but not required.
+  `GET`
+  
+*  **URL Params**
 
-## Q&A
+   **Required:**
+ 
+   `id=[integer]`
 
-> Where should I send back the result when I'm done?
+* **Data Params**
 
-Fork this repo and send us a pull request when you think you are done. Or send me the link of the forked repo.
+   None
 
-> What if I have a question?
+* **Success Response:**
 
-Create a new issue in this repo or send me an email.
+  * **Code:** 200 <br />
+    **Content:** `{ id: 1, name: "Leonardo", dob: "1995-09-29", address: "Avenida Brasil, 2042", description: "Minha descrição", createdAt: "2021-03-14T15:52:53.000Z", updatedAt: "2021-03-14T15:52:53.000Z" }`
+ 
+* **Error Response:**
+
+  * **Code:** 404 <br />
+    **Content:** `{ error: "User not found" }`
+
+**Create User**
+----
+  Returns json data about the created user.
+
+* **URL**
+
+  /user
+
+* **Method:**
+
+  `POST`
+  
+*  **URL Params**
+
+   None
+
+* **Data Params**
+
+   **Required:**
+ 
+   `name=[string]` <br />
+   `dob=[string]` <br />
+   `address=[string]` <br />
+
+   **Optional:**
+ 
+   `description=[string]`
+
+* **Success Response:**
+
+  * **Code:** 201 <br />
+    **Content:** `{ id: 1, name: "Leonardo", dob: "1995-09-29", address: "Avenida Brasil, 2042", description: "Minha descrição", createdAt: "2021-03-14T15:52:53.000Z", updatedAt: "2021-03-14T15:52:53.000Z" }`
+ 
+* **Error Response:**
+
+  * **Code:** 400 <br />
+    **Content:** `{ errors: [ 'Field "dob" is not a valid date', 'Field "name" must be between 3 and 255 characters' ] }`
+
+**Update User**
+----
+  Returns json data about the updated user.
+
+* **URL**
+
+  /user/:id
+
+* **Method:**
+
+  `PATCH`
+  
+*  **URL Params**
+
+   **Required:**
+ 
+   `id=[integer]`
+
+* **Data Params**
+
+   **Optional:**
+ 
+   `name=[string]` <br />
+   `dob=[string]` <br />
+   `address=[string]` <br />
+   `description=[string]`
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+    **Content:** `{ id: 1, name: "Leonardo", dob: "1995-09-29", address: "Avenida Brasil, 2042", description: "Minha descrição", createdAt: "2021-03-14T15:52:53.000Z", updatedAt: "2021-03-14T15:52:53.000Z" }`
+ 
+* **Error Response:**
+
+  * **Code:** 400 <br />
+    **Content:** `{ errors: [ 'Field "dob" is not a valid date', 'Field "name" must be between 3 and 255 characters' ] }`
+
+  OR
+
+  * **Code:** 404 <br />
+    **Content:** `{ error: "User not found" }`
+
+**Delete User**
+----
+  Returns json data about the deleted user.
+
+* **URL**
+
+  /user/:id
+
+* **Method:**
+
+  `DELETE`
+  
+*  **URL Params**
+
+   **Required:**
+ 
+   `id=[integer]`
+
+* **Data Params**
+
+   None
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+    **Content:** `{ id: 1, name: "Leonardo", dob: "1995-09-29", address: "Avenida Brasil, 2042", description: "Minha descrição", createdAt: "2021-03-14T15:52:53.000Z", updatedAt: "2021-03-14T15:52:53.000Z" }`
+ 
+* **Error Response:**
+
+  * **Code:** 404 <br />
+    **Content:** `{ error: "User not found" }`
