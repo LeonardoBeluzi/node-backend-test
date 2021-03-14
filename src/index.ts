@@ -16,6 +16,10 @@ api.use(router)
 api.use(errorHandler)
 
 //Stating API
-api.listen(port, () => {
-    console.log(`Api listening on port ${port}`)   
-})
+if (require.main === module) {
+    api.listen(port, () => {
+        console.log(`Api listening on port ${port}`)   
+    })
+}
+
+export default api;

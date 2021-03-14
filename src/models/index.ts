@@ -7,8 +7,9 @@ const sequelize: Sequelize = new Sequelize(
         username: databaseConfig.username,
         password: databaseConfig.password,
         host: databaseConfig.host,
-        port: databaseConfig.port,
+        port: Number(databaseConfig.port),
         database: databaseConfig.database,
+        logging: false,
         define: {
             timestamps: true,
             underscored: false
