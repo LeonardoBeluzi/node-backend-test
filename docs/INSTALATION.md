@@ -20,6 +20,11 @@
     * Create a .env file based on .env_example.
     * Edit the new file to suit your needs.
 
+  * **Running migrations**
+    ```
+    $ npm run migration
+    ```
+
   * **Starting the server**
     ```
     $ npm start
